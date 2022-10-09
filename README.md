@@ -3,7 +3,7 @@
 This is React JS project with TypeScript.
 
 
-[Live Project](https://tesodev-task.vercel.app/)
+[Live Project](https://search-portal-ashy.vercel.app/)
 
 ## Project Structure
 
