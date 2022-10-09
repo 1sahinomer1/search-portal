@@ -1,8 +1,9 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter } from "react-router-dom";
 import { render, screen, waitFor } from "@testing-library/react";
-import ShowMore from "./ShowMore";
 import userEvent from "@testing-library/user-event";
+
+import ShowMore from "./ShowMore";
 
 // 100% coverage
 
@@ -163,6 +164,17 @@ describe("Show More", () => {
     setup();
     const nextButton = screen.getByTestId("paginateNext");
     userEvent.click(nextButton);
+    await waitFor(() => {
+      const paginateButtons = screen.getAllByTestId("paginateNumber");
+      expect(paginateButtons).toHaveLength(2);
+    });
+  });
+  it("Does the number of pages change when the previous button is pressed?", async () => {
+    setup();
+    const nextButton = screen.getByTestId("paginateNext");
+    userEvent.click(nextButton);
+    const previousButton = screen.getByTestId("paginatePrevious");
+    userEvent.click(previousButton);
     await waitFor(() => {
       const paginateButtons = screen.getAllByTestId("paginateNumber");
       expect(paginateButtons).toHaveLength(2);

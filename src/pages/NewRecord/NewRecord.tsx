@@ -1,13 +1,16 @@
-import * as S from "./styles";
-import { useNavigate } from "react-router-dom";
-import { FiArrowLeft } from "react-icons/fi";
-import { colors } from "theme";
-import { Button, FormInput } from "components";
-import { useForm } from "react-hook-form";
-import { FormTypes } from "./types";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { FiArrowLeft } from "react-icons/fi";
+
+import { Button, FormInput } from "components";
+
+import { FormTypes } from "./types";
+
+import * as S from "./styles";
+import { colors } from "theme";
 
 const NewRecord = () => {
   const navigate = useNavigate();

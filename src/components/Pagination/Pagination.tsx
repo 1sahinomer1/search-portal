@@ -42,12 +42,13 @@ const Pagination = ({
       </S.Li>
       {paginationRange &&
         paginationRange.length > 0 &&
-        paginationRange.map((pageNumber: any) => {
+        paginationRange.map((pageNumber: any, i: number) => {
           if (pageNumber === "...") {
-            return <S.Dots>&#8230;</S.Dots>;
+            return <S.Dots key={i}>&#8230;</S.Dots>;
           } else {
             return (
               <S.Li
+                key={i}
                 selected={pageNumber === currentPage}
                 onClick={() => onPageChange(pageNumber)}
                 data-testid={`paginateNumber`}

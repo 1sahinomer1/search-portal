@@ -5,3 +5,14 @@
 import "@testing-library/jest-dom";
 
 jest.mock("api/records");
+
+//For slick
+window.matchMedia =
+  window.matchMedia ||
+  function () {
+    return {
+      matches: false,
+      addListener: function () {},
+      removeListener: function () {},
+    };
+  };

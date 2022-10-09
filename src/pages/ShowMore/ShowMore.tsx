@@ -77,15 +77,13 @@ const ShowMore = () => {
       <S.Content>
         <S.RecordContaner>
           {isFetching ? (
-            [0, 1, 2, 3, 4].map((skeleton) => (
-              <SkeletonRecords key={skeleton} />
-            ))
+            [0, 1, 2, 3, 4].map((skeleton, i) => <SkeletonRecords key={i} />)
           ) : currentTableData && currentTableData.length > 0 ? (
             currentTableData.map((item: any, i: number) => (
-              <>
+              <div key={i}>
                 <ListItem item={item} />
                 {i !== 4 && <hr />}
-              </>
+              </div>
             ))
           ) : (
             <p>Sonuç bulunamadı.</p>
