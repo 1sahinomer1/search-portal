@@ -1,77 +1,58 @@
-import { useMemo } from "react";
-
-import { range } from "utils";
-
 type PaginationProps = {
   totalCount: number; //Toplam veri sayısı
-  pageSize: number; // Sayfada gösterilecek item sayısı
-  siblingCount?: number; //Aktif sayfa numarasının sol ve sağında gösterilecek sayfa numarası sayısı
+  itemsPerPage: number; // Sayfada gösterilecek item sayısı
   currentPage: number; //Aktif sayfa
 };
 
 const usePagination = ({
-  totalCount,
-  pageSize,
-  siblingCount = 1,
+  totalCount = 100,
+  itemsPerPage = 5,
   currentPage,
-}: PaginationProps) => {
-  const paginationRange = useMemo(() => {
-    const DOTS = "...";
-    //Toplam Veri sayısı / Sayfada gösterilecek item sayısı'nı bir üst sayıya yuvarlayarak toplam sayfa sayısını bulur.
-    const totalPageCount = Math.ceil(totalCount / pageSize);
-    //Sayfa sayısı siblingCount + firstPage + lastPage + currentPage + 2*Dots olarak belirleniyor
-    const totalPageNumbers = siblingCount + 5;
+  setCurrentPage,
+}: any) => {
+  let pages: any[] = [];
+  const getLastPage = () => {
+    return pages[pages.length - 1];
+  };
+  const changePage = (page: any) => {
+    setCurrentPage(page);
+  };
+  const pageBack = () => {
+    if (currentPage === 1) return;
+    setCurrentPage(currentPage - 1);
+  };
+  const pageForward = () => {
+    if (currentPage === getLastPage()) return;
+    setCurrentPage(currentPage + 1);
+  };
 
-    // Sayfa sayısı göstermek istediğimiz sayfa sayısından az ise sayfa sayısı kadar dizi oluşturur.
-    if (totalPageNumbers >= totalPageCount) {
-      return range(1, totalPageCount);
-    }
-
-    //Sol tarafta kaçtane sayfa numarası var
-    const leftSiblingIndex = Math.max(currentPage - siblingCount, 1);
-
-    //Kaçıncı indisteyim
-    const rightSiblingIndex = Math.min(
-      currentPage + siblingCount,
-      totalPageCount
+  //Math abs her zaman mutlak değer döndürür
+  //Math ceil her zaman bir üste değer döndürür
+  const pageListLength = Math.ceil(Math.abs(totalCount / itemsPerPage)) || 1;
+  //Eğer sayfa sayısı 8den az ise
+  if (pageListLength <= 8) {
+    //8 e kadar direkt tüm sayfaları oluşturur
+    // [1,2,3,4,5,6,7,8]
+    pages = Array.from(Array(pageListLength), (_, index) => index + 1);
+    return;
+  }
+  pages.push(1);
+  if (currentPage < 5) {
+    //Sayfa sayısı 5'den küçükse daha fazlasını ... ile göster
+    pages.push(2, 3, 4, 5, "...");
+  } else if (currentPage >= 5 && currentPage <= pageListLength - 4) {
+    //aktif olan sayfa sayısı 5 den büyükse ve sayfa sayısının 4 eksiği aktif sayfadan büyükse
+    pages.push("...", currentPage - 1, currentPage, currentPage + 1, "...");
+  } else {
+    pages.push(
+      "...",
+      pageListLength - 4,
+      pageListLength - 3,
+      pageListLength - 2,
+      pageListLength - 1
     );
-
-    //Sol tarafta 2den fazla sayfa numarası varsa sol tarafın noktaları gösterilsin
-    const shouldShowLeftDots = leftSiblingIndex > 1;
-
-    const shouldShowRightDots = rightSiblingIndex < totalPageCount - 2;
-
-    //İlk sayfanın indexi 1 ile başlasın
-    const firstPageIndex = 1;
-    //Son sayfanın indexi toplam sayfa sayısı ile başlasın
-    const lastPageIndex = totalPageCount;
-
-    if (!shouldShowLeftDots && shouldShowRightDots) {
-      let leftItemCount = 1 + 2 * siblingCount;
-      let leftRange = range(1, leftItemCount);
-      return [
-        ...leftRange,
-        DOTS,
-        totalPageCount - 2,
-        totalPageCount - 1,
-        totalPageCount,
-      ];
-    }
-
-    if (shouldShowLeftDots && !shouldShowRightDots) {
-      let rightItemCount = 3 + 2 * siblingCount;
-      let rightRange = range(
-        totalPageCount - rightItemCount + 1,
-        totalPageCount
-      );
-      return [firstPageIndex, DOTS, ...rightRange];
-    }
-
-    if (shouldShowLeftDots && shouldShowRightDots) {
-      let middleRange = range(leftSiblingIndex, rightSiblingIndex);
-      return [firstPageIndex, DOTS, ...middleRange, DOTS, lastPageIndex];
-    }
-  }, [totalCount, pageSize, siblingCount, currentPage]);
-  return paginationRange;
+  }
+  pages.push(pageListLength);
+  return { pages, currentPage, changePage, pageBack, pageForward };
 };
 export default usePagination;

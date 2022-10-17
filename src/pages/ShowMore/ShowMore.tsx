@@ -151,8 +151,7 @@ const ShowMore = () => {
           totalCount={
             filteredData && filteredData.length > 0 ? filteredData.length : 0
           }
-          pageSize={PageSize}
-          onPageChange={(page: number) => setCurrentPage(page)}
+          setCurrentPage={setCurrentPage}
         />
       </S.PaginationContainer>
     </div>

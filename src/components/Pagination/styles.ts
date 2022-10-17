@@ -66,13 +66,3 @@ export const MultiPageCount = styled.div`
   align-items: center;
   width: 50%;
 `;
-export const MorePageCount = styled.div`
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 28px;
-  width: 37px;
-  height: 25px;
-  color: #000000;
-`;
