@@ -2,14 +2,15 @@ type PaginationProps = {
   totalCount: number; //Toplam veri sayısı
   itemsPerPage: number; // Sayfada gösterilecek item sayısı
   currentPage: number; //Aktif sayfa
+  setCurrentPage: (page: number) => void; //Sayfa değişimi
 };
 
 const usePagination = ({
-  totalCount = 100,
+  totalCount,
   itemsPerPage = 5,
   currentPage,
   setCurrentPage,
-}: any) => {
+}: PaginationProps) => {
   let pages: any[] = [];
   const getLastPage = () => {
     return pages[pages.length - 1];
@@ -34,7 +35,7 @@ const usePagination = ({
     //8 e kadar direkt tüm sayfaları oluşturur
     // [1,2,3,4,5,6,7,8]
     pages = Array.from(Array(pageListLength), (_, index) => index + 1);
-    return;
+    return { pages, changePage, pageBack, pageForward };
   }
   pages.push(1);
   if (currentPage < 5) {

@@ -12,6 +12,7 @@ const Pagination = ({
   const paginate = usePagination({
     totalCount,
     currentPage,
+    itemsPerPage: 5,
     setCurrentPage,
   });
 
@@ -30,11 +31,21 @@ const Pagination = ({
   };
   return (
     <S.MultiPageCount>
-      <S.Li onClick={() => paginate && paginate.pageBack()}>Previous</S.Li>
+      <S.Li
+        onClick={() => paginate && paginate.pageBack()}
+        disabled={currentPage === 1}
+      >
+        Previous
+      </S.Li>
       <S.Ul>
         {paginate && paginate.pages.map((page: any) => <>{renderPage(page)}</>)}
       </S.Ul>
-      <S.Li onClick={() => paginate && paginate.pageForward()}>Next</S.Li>
+      <S.Li
+        onClick={() => paginate && paginate.pageForward()}
+        disabled={totalCount / currentPage <= 5}
+      >
+        Next
+      </S.Li>
     </S.MultiPageCount>
   );
 };
