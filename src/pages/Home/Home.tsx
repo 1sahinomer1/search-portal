@@ -86,48 +86,53 @@ const Home = () => {
           <LeftArrow onClick={() => sliderRef?.slickPrev()} cursor="pointer" />
         </S.ArrowLeftContainer>
         <S.ArrowRightContainer>
-          <RightArrow onClick={() => sliderRef?.slickPrev()} cursor="pointer" />
+          <RightArrow onClick={() => sliderRef?.slickNext()} cursor="pointer" />
         </S.ArrowRightContainer>
         <Slider ref={(ref) => setSliderRef(ref)} {...settings}>
           <S.CarouselItem>
             <img src="carouselImage.png" alt="" />
             <h3>A Plan to Rebuild the Bus Terminal Everyone Loves to Hate</h3>
-            <p>1h ago · by Troy Corlson</p>
+            <p>1h ago · by Troy Corlson 1 </p>
           </S.CarouselItem>
           <S.CarouselItem>
             <img src="carouselImage.png" alt="" />
             <h3>A Plan to Rebuild the Bus Terminal Everyone Loves to Hate</h3>
-            <p>1h ago · by Troy Corlson</p>
+            <p>1h ago · by Troy Corlson 2</p>
           </S.CarouselItem>
           <S.CarouselItem>
             <img src="carouselImage.png" alt="" />
             <h3>A Plan to Rebuild the Bus Terminal Everyone Loves to Hate</h3>
-            <p>1h ago · by Troy Corlson</p>
+            <p>1h ago · by Troy Corlson 3</p>
           </S.CarouselItem>
           <S.CarouselItem>
             <img src="carouselImage.png" alt="" />
             <h3>A Plan to Rebuild the Bus Terminal Everyone Loves to Hate</h3>
-            <p>1h ago · by Troy Corlson</p>
+            <p>1h ago · by Troy Corlson 4 </p>
           </S.CarouselItem>
           <S.CarouselItem>
             <img src="carouselImage.png" alt="" />
             <h3>A Plan to Rebuild the Bus Terminal Everyone Loves to Hate</h3>
-            <p>1h ago · by Troy Corlson</p>
+            <p>1h ago · by Troy Corlson 5</p>
           </S.CarouselItem>
           <S.CarouselItem>
             <img src="carouselImage.png" alt="" />
             <h3>A Plan to Rebuild the Bus Terminal Everyone Loves to Hate</h3>
-            <p>1h ago · by Troy Corlson</p>
+            <p>1h ago · by Troy Corlson 6</p>
           </S.CarouselItem>
           <S.CarouselItem>
             <img src="carouselImage.png" alt="" />
             <h3>A Plan to Rebuild the Bus Terminal Everyone Loves to Hate</h3>
-            <p>1h ago · by Troy Corlson</p>
+            <p>1h ago · by Troy Corlson 7</p>
           </S.CarouselItem>
           <S.CarouselItem>
             <img src="carouselImage.png" alt="" />
             <h3>A Plan to Rebuild the Bus Terminal Everyone Loves to Hate</h3>
-            <p>1h ago · by Troy Corlson</p>
+            <p>1h ago · by Troy Corlson 8</p>
+          </S.CarouselItem>
+          <S.CarouselItem>
+            <img src="carouselImage.png" alt="" />
+            <h3>A Plan to Rebuild the Bus Terminal Everyone Loves to Hate</h3>
+            <p>1h ago · by Troy Corlson 9</p>
           </S.CarouselItem>
         </Slider>
       </S.CarouselSection>
