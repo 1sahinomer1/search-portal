@@ -18,9 +18,24 @@ const NewRecord = () => {
   const [enteredData, setEnteredData] = useState<FormTypes>();
 
   const validationSchema = yup.object({
-    nameSurname: yup.string().required("Required"),
-    country: yup.string().required("Required"),
-    city: yup.string().required("Required"),
+    nameSurname: yup
+      .string()
+      .required("Required")
+      .min(4, "Minimum 4 characters")
+      .max(60, "Maximum 60 characters")
+      .matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for this field"),
+    country: yup
+      .string()
+      .required("Required")
+      .min(4, "Minimum 4 characters")
+      .max(60, "Maximum 60 characters")
+      .matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for this field"),
+    city: yup
+      .string()
+      .required("Required")
+      .min(4, "Minimum 4 characters")
+      .max(60, "Maximum 60 characters")
+      .matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for this field"),
     email: yup.string().email("Invalid email").required("Required"),
   });
 
@@ -63,6 +78,7 @@ const NewRecord = () => {
           label="Country"
           margin="0 0 37px 0"
           placeholder="Enter a country"
+          type="text"
           error={errors.country?.message}
           {...register("country")}
         />
