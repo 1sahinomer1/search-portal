@@ -15,7 +15,7 @@ import { useGetRecords } from "hooks";
 import { IRecord } from "hooks/types";
 
 import { searchData, orderData } from "utils";
-
+import logo from "assets/images/smallLogo.png";
 import * as S from "./styles";
 
 let PageSize = 5;
@@ -49,7 +49,7 @@ const ShowMore = () => {
   return (
     <div>
       <S.TopHeader>
-        <img src="smallLogo.png" alt="logo"></img>
+        <img src={logo} alt="logo" onClick={() => navigate("/")}></img>
 
         <S.TopMid>
           <SearchInput

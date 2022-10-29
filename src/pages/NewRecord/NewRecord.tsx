@@ -9,6 +9,8 @@ import { Button, FormInput } from "components";
 
 import { FormTypes } from "./types";
 
+import logo from "assets/images/smallLogo.png";
+
 import * as S from "./styles";
 import { colors } from "theme";
 
@@ -50,7 +52,7 @@ const NewRecord = () => {
   return (
     <S.Container>
       <S.TopHeader>
-        <img src="smallLogo.png" alt="logo"></img>
+        <img src={logo} alt="logo"></img>
         <S.BackShowMore
           onClick={() => navigate("/show-more")}
           data-testid="navigateBack"

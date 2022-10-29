@@ -22,8 +22,9 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/show-more/:search" element={<ShowMore />} />
           <Route path="/show-more" element={<ShowMore />} />
+          <Route path="/show-more/:search" element={<ShowMore />} />
+
           <Route path="/new-record" element={<NewRecords />} />
         </Routes>
       </BrowserRouter>

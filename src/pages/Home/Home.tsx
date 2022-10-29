@@ -17,7 +17,11 @@ import { LeftArrow, RightArrow } from "icons";
 
 import * as S from "./styles";
 import { searchData } from "utils";
+
+import footerImage from "assets/images/footerImage.png";
+import logo from "assets/images/logo.png";
 import sliderItems from "constants/sliderItems";
+import sliderPhoto from "assets/images/carouselImage.png";
 
 const settings = {
   speed: 500,
@@ -44,7 +48,7 @@ const Home = () => {
         <Button onClick={() => navigate("/new-record")}>Add new record</Button>
       </S.AddNewRecordSection>
       <S.Header>
-        <img src="logo.png" alt="logo"></img>
+        <img src={logo} alt="logo"></img>
         <p>Search App</p>
       </S.Header>
       <S.SearchSection>
@@ -98,7 +102,7 @@ const Home = () => {
         <Slider ref={(ref) => setSliderRef(ref)} {...settings}>
           {sliderItems.map((item) => (
             <S.CarouselItem key={item.id}>
-              <img src={item.path} alt={item.title} />
+              <img src={sliderPhoto} alt={item.title} />
               <h3>{item.title}</h3>
               <p>{item.description}</p>
             </S.CarouselItem>
@@ -108,7 +112,7 @@ const Home = () => {
 
       <S.Footer>
         <S.LeftSection>
-          <img src="footerImage.png" alt="" />
+          <img src={footerImage} alt="" />
           <S.InfoSection>
             <>
               <S.ContactTitle>İletişim</S.ContactTitle>

@@ -10,6 +10,7 @@ export const TopHeader = styled.div`
   img {
     width: 149px;
     height: auto;
+    cursor: pointer;
   }
 `;
 
