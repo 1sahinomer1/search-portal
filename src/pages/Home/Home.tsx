@@ -17,11 +17,12 @@ import { LeftArrow, RightArrow } from "icons";
 
 import * as S from "./styles";
 import { searchData } from "utils";
+import sliderItems from "constants/sliderItems";
 
 const settings = {
   speed: 500,
   slidesToShow: 3,
-  slidesToScroll: 3,
+  slidesToScroll: 1,
 };
 
 let DefaultIcon = Leaflet.icon({
@@ -83,57 +84,25 @@ const Home = () => {
       <S.CarouselSection isHaveContent={data && data?.length > 0}>
         <S.CarouselTitle>Top News</S.CarouselTitle>
         <S.ArrowLeftContainer>
-          <LeftArrow onClick={() => sliderRef?.slickPrev()} cursor="pointer" />
+          <LeftArrow
+            onClick={() => {
+              console.log(sliderRef);
+              sliderRef?.slickPrev();
+            }}
+            cursor="pointer"
+          />
         </S.ArrowLeftContainer>
         <S.ArrowRightContainer>
           <RightArrow onClick={() => sliderRef?.slickNext()} cursor="pointer" />
         </S.ArrowRightContainer>
         <Slider ref={(ref) => setSliderRef(ref)} {...settings}>
-          <S.CarouselItem>
-            <img src="carouselImage.png" alt="" />
-            <h3>A Plan to Rebuild the Bus Terminal Everyone Loves to Hate</h3>
-            <p>1h ago · by Troy Corlson 1 </p>
-          </S.CarouselItem>
-          <S.CarouselItem>
-            <img src="carouselImage.png" alt="" />
-            <h3>A Plan to Rebuild the Bus Terminal Everyone Loves to Hate</h3>
-            <p>1h ago · by Troy Corlson 2</p>
-          </S.CarouselItem>
-          <S.CarouselItem>
-            <img src="carouselImage.png" alt="" />
-            <h3>A Plan to Rebuild the Bus Terminal Everyone Loves to Hate</h3>
-            <p>1h ago · by Troy Corlson 3</p>
-          </S.CarouselItem>
-          <S.CarouselItem>
-            <img src="carouselImage.png" alt="" />
-            <h3>A Plan to Rebuild the Bus Terminal Everyone Loves to Hate</h3>
-            <p>1h ago · by Troy Corlson 4 </p>
-          </S.CarouselItem>
-          <S.CarouselItem>
-            <img src="carouselImage.png" alt="" />
-            <h3>A Plan to Rebuild the Bus Terminal Everyone Loves to Hate</h3>
-            <p>1h ago · by Troy Corlson 5</p>
-          </S.CarouselItem>
-          <S.CarouselItem>
-            <img src="carouselImage.png" alt="" />
-            <h3>A Plan to Rebuild the Bus Terminal Everyone Loves to Hate</h3>
-            <p>1h ago · by Troy Corlson 6</p>
-          </S.CarouselItem>
-          <S.CarouselItem>
-            <img src="carouselImage.png" alt="" />
-            <h3>A Plan to Rebuild the Bus Terminal Everyone Loves to Hate</h3>
-            <p>1h ago · by Troy Corlson 7</p>
-          </S.CarouselItem>
-          <S.CarouselItem>
-            <img src="carouselImage.png" alt="" />
-            <h3>A Plan to Rebuild the Bus Terminal Everyone Loves to Hate</h3>
-            <p>1h ago · by Troy Corlson 8</p>
-          </S.CarouselItem>
-          <S.CarouselItem>
-            <img src="carouselImage.png" alt="" />
-            <h3>A Plan to Rebuild the Bus Terminal Everyone Loves to Hate</h3>
-            <p>1h ago · by Troy Corlson 9</p>
-          </S.CarouselItem>
+          {sliderItems.map((item) => (
+            <S.CarouselItem key={item.id}>
+              <img src={item.path} alt={item.title} />
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+            </S.CarouselItem>
+          ))}
         </Slider>
       </S.CarouselSection>
 

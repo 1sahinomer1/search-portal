@@ -57,7 +57,7 @@ const ShowMore = () => {
             onChange={({ target: { value } }) => setSearch(value)}
           />
           <Button
-            disabled={search && (search?.length < 3 || search === "")}
+            disabled={search && (search?.length < 1 || search === "")}
             onClick={() => {
               data && setFilteredData(searchData(data, search));
               setCurrentPage(1);
@@ -75,85 +75,91 @@ const ShowMore = () => {
         </Button>
       </S.TopHeader>
       <S.Content>
-        <S.RecordContaner>
-          {isFetching ? (
-            [0, 1, 2, 3, 4].map((skeleton, i) => <SkeletonRecords key={i} />)
-          ) : currentTableData && currentTableData.length > 0 ? (
-            currentTableData.map((item: any, i: number) => (
-              <div key={i}>
-                <ListItem item={item} />
-                {i !== 4 && <hr />}
-              </div>
-            ))
-          ) : (
-            <p>Sonuç bulunamadı.</p>
-          )}
-        </S.RecordContaner>
-        {currentTableData && currentTableData.length > 0 && (
-          <S.OrderContainer>
-            <S.OrderButton
-              onClick={() => setIsViewDropdown((old) => !old)}
-              data-testid="isViewDropdown"
-            >
-              <OrderIcon />
-              <p data-testid="orderText">Order by</p>
-            </S.OrderButton>
-            {isViewDropdown && (
-              <S.OrderContent>
-                <S.OrderItem
-                  selected={sortOrder === "name-ascending"}
-                  onClick={() => {
-                    setSortOrder("name-ascending");
-                    setIsViewDropdown(false);
-                  }}
-                  data-testid="orderNameAscending"
-                >
-                  Name ascending
-                </S.OrderItem>
-                <S.OrderItem
-                  selected={sortOrder === "name-descending"}
-                  onClick={() => {
-                    setSortOrder("name-descending");
-                    setIsViewDropdown(false);
-                  }}
-                  data-testid="orderNameDescending"
-                >
-                  Name descending
-                </S.OrderItem>
-                <S.OrderItem
-                  selected={sortOrder === "year-ascending"}
-                  onClick={() => {
-                    setSortOrder("year-ascending");
-                    setIsViewDropdown(false);
-                  }}
-                  data-testid="orderYearAscending"
-                >
-                  Year ascending
-                </S.OrderItem>
-                <S.OrderItem
-                  selected={sortOrder === "year-descending"}
-                  onClick={() => {
-                    setSortOrder("year-descending");
-                    setIsViewDropdown(false);
-                  }}
-                  data-testid="orderYearDescending"
-                >
-                  Year descending
-                </S.OrderItem>
-              </S.OrderContent>
+        <S.Flex>
+          <S.RecordContaner>
+            {isFetching ? (
+              [0, 1, 2, 3, 4].map((skeleton, i) => <SkeletonRecords key={i} />)
+            ) : currentTableData && currentTableData.length > 0 ? (
+              currentTableData.map((item: any, i: number) => (
+                <div key={i}>
+                  <ListItem item={item} />
+                  {i !== 4 && <hr />}
+                </div>
+              ))
+            ) : (
+              <p>Sonuç bulunamadı.</p>
             )}
-          </S.OrderContainer>
+          </S.RecordContaner>
+          {currentTableData && currentTableData.length > 0 && (
+            <S.OrderContainer>
+              <S.OrderButton
+                onClick={() => setIsViewDropdown((old) => !old)}
+                data-testid="isViewDropdown"
+              >
+                <OrderIcon />
+                <p data-testid="orderText">Order by</p>
+              </S.OrderButton>
+              {isViewDropdown && (
+                <S.OrderContent>
+                  <S.OrderItem
+                    selected={sortOrder === "name-ascending"}
+                    onClick={() => {
+                      setSortOrder("name-ascending");
+                      setIsViewDropdown(false);
+                    }}
+                    data-testid="orderNameAscending"
+                  >
+                    Name ascending
+                  </S.OrderItem>
+                  <S.OrderItem
+                    selected={sortOrder === "name-descending"}
+                    onClick={() => {
+                      setSortOrder("name-descending");
+                      setIsViewDropdown(false);
+                    }}
+                    data-testid="orderNameDescending"
+                  >
+                    Name descending
+                  </S.OrderItem>
+                  <S.OrderItem
+                    selected={sortOrder === "year-ascending"}
+                    onClick={() => {
+                      setSortOrder("year-ascending");
+                      setIsViewDropdown(false);
+                    }}
+                    data-testid="orderYearAscending"
+                  >
+                    Year ascending
+                  </S.OrderItem>
+                  <S.OrderItem
+                    selected={sortOrder === "year-descending"}
+                    onClick={() => {
+                      setSortOrder("year-descending");
+                      setIsViewDropdown(false);
+                    }}
+                    data-testid="orderYearDescending"
+                  >
+                    Year descending
+                  </S.OrderItem>
+                </S.OrderContent>
+              )}
+            </S.OrderContainer>
+          )}
+        </S.Flex>
+        {currentTableData && currentTableData.length > 0 && (
+          <S.PaginationContainer>
+            <Pagination
+              currentPage={currentPage}
+              totalCount={
+                filteredData && filteredData.length > 0
+                  ? filteredData.length
+                  : 0
+              }
+              setCurrentPage={setCurrentPage}
+            />
+          </S.PaginationContainer>
         )}
       </S.Content>
-      <S.PaginationContainer>
-        <Pagination
-          currentPage={currentPage}
-          totalCount={
-            filteredData && filteredData.length > 0 ? filteredData.length : 0
-          }
-          setCurrentPage={setCurrentPage}
-        />
-      </S.PaginationContainer>
     </div>
   );
 };

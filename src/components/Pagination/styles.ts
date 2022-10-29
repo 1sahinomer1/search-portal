@@ -64,5 +64,6 @@ export const MultiPageCount = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 50%;
+  width: 100%;
+  margin: 50px 0;
 `;

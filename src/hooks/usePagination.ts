@@ -5,24 +5,29 @@ type PaginationProps = {
   setCurrentPage: (page: number) => void; //Sayfa değişimi
 };
 
+//İçerisine sayı yada ... gelebilir.
+type Pages = number | string;
+
 const usePagination = ({
   totalCount,
   itemsPerPage = 5,
   currentPage,
   setCurrentPage,
 }: PaginationProps) => {
-  let pages: any[] = [];
-  const getLastPage = () => {
-    return pages[pages.length - 1];
-  };
-  const changePage = (page: any) => {
-    setCurrentPage(page);
-  };
+  let pages: Pages[] = [];
+  //Son sayfayı alır
+  const getLastPage = () => pages[pages.length - 1];
+
+  //Sayfa değiştirme işlemini gerçekleştirir.
+  const changePage = (page: any) => setCurrentPage(page);
+
   const pageBack = () => {
+    //Sayfa sayısı 1 ise geri dönme işlemi gerçekleştirilmez.
     if (currentPage === 1) return;
     setCurrentPage(currentPage - 1);
   };
   const pageForward = () => {
+    //Son sayfaya gelindiğinde ileri gitme işlemi gerçekleştirilmez.
     if (currentPage === getLastPage()) return;
     setCurrentPage(currentPage + 1);
   };
@@ -38,21 +43,25 @@ const usePagination = ({
     return { pages, changePage, pageBack, pageForward };
   }
   pages.push(1);
-  if (currentPage < 5) {
-    //Sayfa sayısı 5'den küçükse daha fazlasını ... ile göster
-    pages.push(2, 3, 4, 5, "...");
-  } else if (currentPage >= 5 && currentPage <= pageListLength - 4) {
-    //aktif olan sayfa sayısı 5 den büyükse ve sayfa sayısının 4 eksiği aktif sayfadan büyükse
+
+  if (currentPage < 3) {
+    //Sayfa sayısı 3'den küçükse daha fazlasını ... ile göster
+    pages.push(2, 3, "...", pageListLength - 2, pageListLength - 1);
+  } else if (currentPage === 3) {
+    pages.push(2, 3, 4, "...", pageListLength - 2, pageListLength - 1);
+  } else if (currentPage >= 4 && currentPage <= pageListLength - 3) {
     pages.push("...", currentPage - 1, currentPage, currentPage + 1, "...");
   } else {
     pages.push(
+      2,
+      3,
       "...",
-      pageListLength - 4,
       pageListLength - 3,
       pageListLength - 2,
       pageListLength - 1
     );
   }
+
   pages.push(pageListLength);
   return { pages, currentPage, changePage, pageBack, pageForward };
 };

@@ -26,11 +26,15 @@ export const TopMid = styled.div`
 export const Content = styled.div`
   width: 60%;
   display: flex;
+  flex-direction: column;
   margin: 0 auto;
   hr {
     transform: matrix(1, 0, 0, 1, 0, 0);
     margin: 14px 0;
   }
+`;
+export const Flex = styled.div`
+  display: flex;
 `;
 
 export const RecordContaner = styled.div`
@@ -106,7 +110,8 @@ export const OrderItem = styled.button<{ selected?: boolean }>`
 `;
 
 export const PaginationContainer = styled.div`
-  width: 100%;
+  width: 60%;
+  margin: 0 auto;
   display: flex;
   justify-content: center;
 `;
