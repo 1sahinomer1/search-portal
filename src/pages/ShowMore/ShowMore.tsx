@@ -57,7 +57,7 @@ const ShowMore = () => {
             onChange={({ target: { value } }) => setSearch(value)}
           />
           <Button
-            disabled={search && (search?.length < 1 || search === "")}
+            disabled={search && (search?.length < 3 || search === "")}
             onClick={() => {
               data && setFilteredData(searchData(data, search));
               setCurrentPage(1);
